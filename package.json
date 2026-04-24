@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently -c \"blue,green\" -n \"WEB,API\" \"vite\" \"json-server db.json\"",
+    "api": "json-server db.json",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
