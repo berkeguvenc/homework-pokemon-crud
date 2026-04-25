@@ -1,39 +1,60 @@
 {
   "pokemons": [
     {
-      "id": "1",
+      "id": "25",
       "name": "Pikachu",
       "type": "Electric",
-      "level": 25,
+      "level": 50,
       "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
     },
     {
-      "id": "4",
-      "name": "Charmander",
-      "type": "Fire",
-      "level": 12,
-      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
-    },
-    {
-      "id": "7",
-      "name": "Squirtle",
-      "type": "Water",
-      "level": 15,
-      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"
-    },
-    {
-      "id": "1 Bos",
-      "name": "Bulbasaur",
-      "type": "Grass/Poison",
-      "level": 14,
-      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+      "id": "6",
+      "name": "Charizard",
+      "type": "Fire/Flying",
+      "level": 65,
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
     },
     {
       "id": "133",
       "name": "Eevee",
       "type": "Normal",
-      "level": 18,
+      "level": 20,
       "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"
+    },
+    {
+      "id": "197",
+      "name": "Umbreon",
+      "type": "Dark",
+      "level": 40,
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/197.png"
+    },
+    {
+      "id": "448",
+      "name": "Lucario",
+      "type": "Fighting/Steel",
+      "level": 48,
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png"
+    },
+    {
+      "id": "658",
+      "name": "Greninja",
+      "type": "Water/Dark",
+      "level": 52,
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png"
+    },
+    {
+      "id": "94",
+      "name": "Gengar",
+      "type": "Ghost/Poison",
+      "level": 45,
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png"
+    },
+    {
+      "id": "700",
+      "name": "Sylveon",
+      "type": "Fairy",
+      "level": 35,
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png"
     },
     {
       "id": "150",
@@ -41,6 +62,14 @@
       "type": "Psychic",
       "level": 70,
       "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
+    },
+    {
+      "id": "143",
+      "name": "Snorlax",
+      "type": "Normal",
+      "level": 42,
+      "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
