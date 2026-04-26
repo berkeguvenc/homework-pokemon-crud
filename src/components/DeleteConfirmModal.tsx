@@ -16,17 +16,16 @@ const DeleteConfirmModal = ({
       className={`modal modal-bottom sm:modal-middle ${isOpen ? "modal-open" : ""}`}
     >
       <div className="modal-box">
-        <h3 className="font-bold text-lg text-error">Dikkat!</h3>
+        <h3 className="font-bold text-lg text-error">Warning!</h3>
         <p className="py-4">
-          <strong>{pokemonName}</strong> isimli pokemon'u silmek istediğinize
-          emin misiniz?
+          Are you sure you want to delete <strong>{pokemonName}</strong>?
         </p>
         <div className="modal-action">
           <button className="btn" onClick={onClose}>
-            Vazgeç
+            Cancel
           </button>
           <button className="btn btn-error" onClick={onConfirm}>
-            Sil
+            Delete
           </button>
         </div>
       </div>
