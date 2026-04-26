@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Pokemon } from "../types/pokemon";
 import DeleteConfirmModal from "./DeleteConfirmModal";
 import EditPokemonModal from "./EditPokemonModal";
+import { ArrowUpDown, ArrowDown01, ArrowUp10 } from "lucide-react";
 
 type Props = {
   data: Pokemon[] | undefined;
@@ -23,6 +24,13 @@ const PokemonList = ({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedEditPokemon, setSelectedEditPokemon] =
     useState<Pokemon | null>(null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
+
+  const handleSort = () => {
+    setSortOrder((prev) =>
+      prev === "asc" ? "desc" : prev === "desc" ? null : "asc",
+    );
+  };
 
   const handleEditClick = (pokemon: Pokemon) => {
     setSelectedEditPokemon(pokemon);
@@ -102,6 +110,13 @@ const PokemonList = ({
       );
     }
 
+    const sortedData = data ? [...data] : [];
+    if (sortOrder) {
+      sortedData.sort((a, b) =>
+        sortOrder === "asc" ? a.level - b.level : b.level - a.level,
+      );
+    }
+
     return (
       <table className="table table-zebra">
         <thead className="bg-base-200/50">
@@ -109,12 +124,34 @@ const PokemonList = ({
             <th>Image</th>
             <th>Name</th>
             <th>Type</th>
-            <th>Level</th>
+            <th
+              className="cursor-pointer hover:bg-base-300"
+              onClick={handleSort}
+            >
+              <div className="flex items-center gap-1">
+                Level
+                {sortOrder === "asc" && (
+                  <span>
+                    <ArrowDown01 />
+                  </span>
+                )}
+                {sortOrder === "desc" && (
+                  <span>
+                    <ArrowUp10 />
+                  </span>
+                )}
+                {!sortOrder && (
+                  <span>
+                    <ArrowUpDown />
+                  </span>
+                )}
+              </div>
+            </th>
             <th className="text-right">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {data?.map((pokemon) => (
+          {sortedData.map((pokemon) => (
             <tr
               key={pokemon.id}
               className="hover:bg-base-200/20 transition-colors"
@@ -181,9 +218,7 @@ const PokemonList = ({
 
   return (
     <section className="card bg-base-100">
-      <div className="overflow-x-auto">
-        {renderContent()}
-      </div>
+      <div className="overflow-x-auto">{renderContent()}</div>
 
       <DeleteConfirmModal
         isOpen={isModalOpen}
