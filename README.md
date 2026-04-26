@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# Homework Pokemon CRUD
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Ödev Gereksinimleri ve Açıklamaları (PDF)](./Ödev%202%20(ODEV).pdf)
 
-Currently, two official plugins are available:
+Bu proje, Pokemonların listelendiği ve yönetildiği (CRUD işlemleri) basit bir React uygulamasıdır. Vite, TypeScript ve JSON Server kullanılarak geliştirilmiştir.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Kullanılan Teknolojiler
 
-## React Compiler
+- [React 19](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [TailwindCSS v4](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+- [React Query](https://tanstack.com/query/latest)
+- [Axios](https://axios-http.com/)
+- [JSON Server](https://github.com/typicode/json-server)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Projeyi Çalıştırma
 
-## Expanding the ESLint configuration
+Projeyi yerel ortamınızda kurup çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Proje dizinine gidin ve bağımlılıkları yükleyin:
+   ```bash
+   npm install
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Geliştirme sunucusunu başlatın (Hem frontend hem de JSON Server aynı anda çalışacaktır):
+   ```bash
+   npm run dev
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3. Tarayıcınızda uygulamanın çalıştığı adresi (genellikle `http://localhost:5173`) açarak projeyi görüntüleyebilirsiniz.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Build Alma
+
+Üretim (production) ortamı için projeyi derlemek isterseniz aşağıdaki komutu kullanabilirsiniz:
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Bu komut, `/dist` klasörü içerisine optimize edilmiş statik dosyaları oluşturacaktır.
