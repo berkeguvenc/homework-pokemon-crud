@@ -25,12 +25,16 @@ const App = () => {
     });
   };
 
+  const handleDelete = (id: string) => {
+    console.log("Siliniyor:", id);
+  };
+
   return (
     <div className="min-h-screen bg-base-300">
       <Navbar />
       <main className="max-w-6xl mx-auto p-4 md:p-8 space-y-6">
         <PokemonForm handleSubmit={handleSubmit} />
-        <PokemonList data={pokemons} />
+        <PokemonList data={pokemons} confirmDelete={handleDelete} />
       </main>
     </div>
   );

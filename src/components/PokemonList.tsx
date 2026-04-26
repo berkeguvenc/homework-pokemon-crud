@@ -1,11 +1,28 @@
-import React from "react";
+import { useState } from "react";
 import type { Pokemon } from "../types/pokemon";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 
 type Props = {
   data: Pokemon[] | undefined;
+  confirmDelete: (id: string) => void;
 };
 
-const PokemonList = ({ data }: Props) => {
+const PokemonList = ({ data, confirmDelete }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+
+  const handleDeleteClick = (pokemon: Pokemon) => {
+    setSelectedPokemon(pokemon);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirm = () => {
+    if (selectedPokemon) {
+      confirmDelete(selectedPokemon.id);
+    }
+    setIsModalOpen(false);
+  };
+
   return (
     <section className="card bg-base-100">
       <div className="overflow-x-auto">
@@ -54,7 +71,10 @@ const PokemonList = ({ data }: Props) => {
                       </svg>
                     </button>
 
-                    <button className="btn btn-square btn-ghost btn-sm text-error">
+                    <button
+                      className="btn btn-square btn-ghost btn-sm text-error"
+                      onClick={() => handleDeleteClick(pokemon)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -77,6 +97,13 @@ const PokemonList = ({ data }: Props) => {
           </tbody>
         </table>
       </div>
+
+      <DeleteConfirmModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        pokemonName={selectedPokemon?.name || ""}
+        onConfirm={handleConfirm}
+      />
     </section>
   );
 };
