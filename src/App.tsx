@@ -19,12 +19,6 @@ const App = () => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    if (
-      !formData.get("name") ||
-      !formData.get("type") ||
-      !formData.get("imageUrl")
-    )
-      return;
     createPokemon({
       name: formData.get("name")?.toString() || "",
       type: formData.get("type")?.toString() || "",
