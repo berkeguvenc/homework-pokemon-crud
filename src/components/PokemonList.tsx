@@ -110,6 +110,8 @@ const PokemonList = ({
         </div>
       );
     }
+    const placeholderImg =
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png";
 
     const filteredData = data
       ? data.filter((pokemon) =>
@@ -173,7 +175,13 @@ const PokemonList = ({
               <td>
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12 bg-base-300">
-                    <img src={pokemon.imageUrl} alt={pokemon.name} />
+                    <img
+                      src={pokemon.imageUrl}
+                      alt={pokemon.name}
+                      onError={(e) => {
+                        e.currentTarget.src = placeholderImg;
+                      }}
+                    />
                   </div>
                 </div>
               </td>

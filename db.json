@@ -69,6 +69,13 @@
       "type": "Normal",
       "level": 42,
       "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png"
+    },
+    {
+      "name": "asdad",
+      "type": "asd",
+      "level": 23,
+      "imageUrl": "asdad",
+      "id": "5zTcll_weQA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
