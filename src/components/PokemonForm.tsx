@@ -54,6 +54,7 @@ const PokemonForm = ({
                 <input
                   className="input w-full"
                   type="number"
+                  placeholder="0"
                   name="level"
                   defaultValue={initialData?.level}
                   required
@@ -63,6 +64,7 @@ const PokemonForm = ({
                 <label className="label-text">Image URL</label>
                 <input
                   className="input w-full"
+                  type="url"
                   placeholder="https://..."
                   name="imageUrl"
                   defaultValue={initialData?.imageUrl}
