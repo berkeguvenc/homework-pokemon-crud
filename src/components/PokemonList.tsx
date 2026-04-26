@@ -25,6 +25,7 @@ const PokemonList = ({
   const [selectedEditPokemon, setSelectedEditPokemon] =
     useState<Pokemon | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSort = () => {
     setSortOrder((prev) =>
@@ -110,7 +111,13 @@ const PokemonList = ({
       );
     }
 
-    const sortedData = data ? [...data] : [];
+    const filteredData = data
+      ? data.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        )
+      : [];
+
+    const sortedData = [...filteredData];
     if (sortOrder) {
       sortedData.sort((a, b) =>
         sortOrder === "asc" ? a.level - b.level : b.level - a.level,
@@ -151,6 +158,13 @@ const PokemonList = ({
           </tr>
         </thead>
         <tbody>
+          {sortedData.length === 0 && data && data.length > 0 && (
+            <tr>
+              <td colSpan={5} className="text-center py-8 text-base-content/70">
+                No Pokémon found.
+              </td>
+            </tr>
+          )}
           {sortedData.map((pokemon) => (
             <tr
               key={pokemon.id}
@@ -218,6 +232,30 @@ const PokemonList = ({
 
   return (
     <section className="card bg-base-100">
+      {data && data.length > 0 && (
+        <div className="p-4 border-b border-base-200/50">
+          <label className="input input-bordered flex items-center gap-2 max-w-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="w-4 h-4 opacity-70"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search Pokémon..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </label>
+        </div>
+      )}
       <div className="overflow-x-auto">{renderContent()}</div>
 
       <DeleteConfirmModal
