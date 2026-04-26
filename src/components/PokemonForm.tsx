@@ -23,11 +23,9 @@ const PokemonForm = ({
           {!isEdit ? "Add New Pokémon" : "Edit Pokémon"}
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className={"flex flex-col lg:flex-row gap-4 items-end"}>
+          <div className={`flex flex-col ${!isEdit ? "lg:flex-row items-end" : ""} gap-4`}>
             <div
-              className={
-                "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
-              }
+              className={`grid grid-cols-1 ${!isEdit ? "sm:grid-cols-2 lg:grid-cols-4" : ""} gap-4 w-full`}
             >
               <div>
                 <label className="label-text">Name</label>
