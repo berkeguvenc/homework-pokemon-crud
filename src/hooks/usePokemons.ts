@@ -48,7 +48,7 @@ export const useDeletePokemon = () => {
   const queryClient = new QueryClient();
 
   return useMutation({
-    mutationFn: (id: number) =>
+    mutationFn: (id: string) =>
       api.delete(`/pokemons/${id}`).then((res) => res.data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["pokemons"] });

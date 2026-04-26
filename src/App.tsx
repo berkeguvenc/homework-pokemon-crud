@@ -1,5 +1,6 @@
 import {
   useCreatePokemon,
+  useDeletePokemon,
   usePokemons,
   useUpdatePokemon,
 } from "./hooks/usePokemons";
@@ -12,6 +13,7 @@ const App = () => {
   const { data: pokemons } = usePokemons();
   const { mutate: createPokemon } = useCreatePokemon();
   const { mutate: updatePokemon } = useUpdatePokemon();
+  const { mutate: deletePokemon } = useDeletePokemon();
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +34,7 @@ const App = () => {
   };
 
   const handleDelete = (id: string) => {
-    console.log("Siliniyor:", id);
+    deletePokemon(id);
   };
 
   const handleEdit = (pokemon: Pokemon) => {
