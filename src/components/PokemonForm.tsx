@@ -6,6 +6,7 @@ type Props = {
   isEdit?: boolean;
   initialData?: Omit<Pokemon, "id">;
   onCancel?: () => void;
+  isDisabled?: boolean;
 };
 
 const PokemonForm = ({
@@ -13,6 +14,7 @@ const PokemonForm = ({
   isEdit = false,
   initialData,
   onCancel,
+  isDisabled = false,
 }: Props) => {
   return (
     <section className={"card bg-base-100"}>
@@ -82,6 +84,7 @@ const PokemonForm = ({
               )}
               <button
                 className={`btn btn-primary ${!isEdit ? "w-full lg:w-auto px-10" : "px-8"}`}
+                disabled={isDisabled}
               >
                 {!isEdit ? "Add" : "Update"}
               </button>

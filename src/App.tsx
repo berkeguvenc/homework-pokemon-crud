@@ -10,8 +10,8 @@ import Navbar from "./components/Navbar";
 import type { Pokemon } from "./types/pokemon";
 
 const App = () => {
-  const { data: pokemons } = usePokemons();
-  const { mutate: createPokemon } = useCreatePokemon();
+  const { data: pokemons, isLoading, isError } = usePokemons();
+  const { mutate: createPokemon, isPending } = useCreatePokemon();
   const { mutate: updatePokemon } = useUpdatePokemon();
   const { mutate: deletePokemon } = useDeletePokemon();
 
@@ -45,11 +45,13 @@ const App = () => {
     <div className="min-h-screen bg-base-300">
       <Navbar />
       <main className="max-w-6xl mx-auto p-4 md:p-8 space-y-6">
-        <PokemonForm handleSubmit={handleSubmit} />
+        <PokemonForm handleSubmit={handleSubmit} isDisabled={isPending} />
         <PokemonList
           data={pokemons}
           confirmDelete={handleDelete}
           confirmEdit={handleEdit}
+          isLoading={isLoading}
+          isError={isError}
         />
       </main>
     </div>
