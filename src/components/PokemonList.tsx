@@ -1,15 +1,48 @@
 import { useState } from "react";
 import type { Pokemon } from "../types/pokemon";
 import DeleteConfirmModal from "./DeleteConfirmModal";
+import EditPokemonModal from "./EditPokemonModal";
 
 type Props = {
   data: Pokemon[] | undefined;
   confirmDelete: (id: string) => void;
+  confirmEdit?: (pokemon: Pokemon) => void;
 };
 
-const PokemonList = ({ data, confirmDelete }: Props) => {
+const PokemonList = ({ data, confirmDelete, confirmEdit }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedEditPokemon, setSelectedEditPokemon] =
+    useState<Pokemon | null>(null);
+
+  const handleEditClick = (pokemon: Pokemon) => {
+    setSelectedEditPokemon(pokemon);
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!selectedEditPokemon || !confirmEdit) {
+      setIsEditModalOpen(false);
+      return;
+    }
+
+    const formData = new FormData(e.currentTarget);
+    const updatedPokemon: Pokemon = {
+      ...selectedEditPokemon,
+      name: formData.get("name")?.toString() || selectedEditPokemon.name,
+      type: formData.get("type")?.toString() || selectedEditPokemon.type,
+      level:
+        parseInt(formData.get("level")?.toString() || "1") ||
+        selectedEditPokemon.level,
+      imageUrl:
+        formData.get("imageUrl")?.toString() || selectedEditPokemon.imageUrl,
+    };
+
+    confirmEdit(updatedPokemon);
+    setIsEditModalOpen(false);
+  };
 
   const handleDeleteClick = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
@@ -54,7 +87,10 @@ const PokemonList = ({ data, confirmDelete }: Props) => {
                 <td>{pokemon.level}</td>
                 <td className="text-right">
                   <div className="flex justify-end gap-1">
-                    <button className="btn btn-square btn-ghost btn-sm text-info">
+                    <button
+                      className="btn btn-square btn-ghost btn-sm text-info"
+                      onClick={() => handleEditClick(pokemon)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -103,6 +139,13 @@ const PokemonList = ({ data, confirmDelete }: Props) => {
         onClose={() => setIsModalOpen(false)}
         pokemonName={selectedPokemon?.name || ""}
         onConfirm={handleConfirm}
+      />
+
+      <EditPokemonModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        pokemon={selectedEditPokemon}
+        onSubmit={handleEditSubmit}
       />
     </section>
   );
